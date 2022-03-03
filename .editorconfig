@@ -1,0 +1,12 @@
+# https://EditorConfig.org
+[*] # 表示所有文件适用
+charset = utf-8
+indent_style = space # 缩进风格 tab / space
+indent_size = 4 # 缩进大小
+end_of_line = lf # 控制换行类型（cr | lf | crlf）
+insert_final_newline = true # 尾部加一行空行
+trim_trailing_whitespace = true # 去除尾部空格
+
+[*.md]
+trim_trailing_whitespace = false # md文件关闭尾部去空格
+max_line_length = off # md文件关闭尾部去空格

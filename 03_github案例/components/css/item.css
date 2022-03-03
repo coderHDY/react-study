@@ -1,0 +1,29 @@
+.infos {
+    display: flex;
+    width: 660px;
+    height: 300px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow: auto;
+}
+.info-box {
+    display: block;
+    width: 100px;
+    height: 130px;
+    border: #333 solid 1px;
+    padding: 2px;
+    overflow: hidden;
+}
+.avator {
+    width: 100px;
+    height: 100px;
+}
+.avator img {
+    height: 100%;
+    width: auto;
+}
+
+.name {
+    line-height: 30px;
+    text-align: center;
+}

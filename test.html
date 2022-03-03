@@ -1,0 +1,22 @@
+<body>
+    <div></div>
+    <div class="hide">asdfasdfasdf</div>
+    <div></div>
+    <script>
+        document.addEventListener('visibilitychange', (function () {
+            let title = document.title;
+            return (e) => {
+                // 用户离开了当前页面
+                if (document.visibilityState === 'hidden') {
+                    document.title = '😤跑去干嘛了？';
+                }
+                // 用户打开或回到页面
+                if (document.visibilityState === 'visible') {
+                    document.title = '😄嘿嘿，欢迎回来';
+                    setTimeout(() => document.title = title, 2000);
+                }
+            }
+        })());
+
+    </script>
+</body>
