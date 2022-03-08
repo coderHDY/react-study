@@ -1,1 +1,1 @@
-initLinksObj
+nums
