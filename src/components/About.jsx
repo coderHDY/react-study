@@ -1,14 +1,23 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
-import qs from 'querystring';
+import { useNavigate, useResolvedPath } from 'react-router-dom';
 export default function About() {
-    const search = useLocation().search;
-    const { id, name } = qs.parse(search.slice(1));
+    console.log(useResolvedPath('http://localhost:3000/about?id=asdf&i=aa')); // boolean
+    const navigate = useNavigate();
+    const goHome = () => {
+        navigate('/home',
+            {
+                replace: false,
+                state: {
+                    id: 1,
+                    name: '李四'
+                }
+            }
+        )
+    }
     return (
         <>
             <div>About</div>
-            <div>姓名：{name}</div>
-            <div>id：{id}</div>
+            <button onClick={goHome}>点我去主页</button>
         </>
     )
 }

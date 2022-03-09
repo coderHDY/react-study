@@ -10,12 +10,10 @@ export default function App() {
             <Header withRouter></Header>
             <div>
                 <NavLink className={computedClassName} end to="/home">Home</NavLink>
-                <NavLink className={computedClassName} to="/about?id=001&name=张三">About</NavLink>
+                <NavLink className={computedClassName} to="/about" state={{ name: '溜溜', id: 3 }}>About</NavLink>
             </div>
             {elements}
         </>
     )
 }
 
-const C1 = () => (<div>c1</div>)
-const C2 = () => (<div>c2</div>)

@@ -3,6 +3,7 @@ import { C1 } from "../components/Home"
 import { C2 } from "../components/Home"
 import About from "../components/About"
 import { Navigate } from "react-router-dom";
+import Err from "../components/Err";
 const routerMap = [
     {
         path: "/home",
@@ -26,6 +27,10 @@ const routerMap = [
         path: "/",
         element: <Navigate to="/home" />,
     },
+    {
+        path: '*',
+        element: <Err />
+    }
 ]
 
 export default routerMap;

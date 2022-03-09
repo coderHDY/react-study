@@ -1,7 +1,8 @@
 import React from 'react'
-import { NavLink, Outlet } from 'react-router-dom'
+import { NavLink, Outlet, useResolvedPath } from 'react-router-dom'
 export default function Home() {
     const computedClassName = ({ isActive }) => isActive ? 'haha' : ''
+    console.log(useResolvedPath('/about?id=asdf&i=aa'));
     return (
         <>
             <div>
