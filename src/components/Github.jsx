@@ -9,7 +9,7 @@ export default function Github() {
         isLoading,
         isFirst,
         isErr,
-    } = useGetData()
+    } = useGetData();
     const showState = () =>
         isFirst ? (<div>你好，欢迎使用github</div>) :
             isErr ? (<div>请求错误，请检查网络*_*</div>) :
@@ -34,7 +34,7 @@ function useGetData() {
         }
         setIsErr(false);
         setIsLoading(true);
-        fetch(`/api/search/users?q=${tip}`)
+        fetch(`https://api.github.com/search/users?q=${tip}`)
             .then(res => res.json())
             .then(res => {
                 setData(res.items)

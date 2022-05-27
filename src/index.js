@@ -1,11 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import { BrowserRouter, HashRouter } from 'react-router-dom';
-import './css/index.css'
+import React from "react"
+import ReactDOM from "react-dom"
+import App from "./app"
 
-ReactDOM.render(
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>
-    , document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById("root"))
