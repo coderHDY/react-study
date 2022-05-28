@@ -1,10 +1,9 @@
-import Github from "./components/Github"
-
-function App() {
+import React from 'react';
+import TodoList from './components/todo-list';
+export default function App() {
     return (
-        <div>
-            <Github />
-        </div>
-    )
+        <>
+            <TodoList />
+        </>
+    );
 }
-export default App
