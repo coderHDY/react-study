@@ -51,10 +51,10 @@ function useList(defaultList = []) {
         const val = item.trim();
         const idx = list.findIndex(item => item.name === val);
         if (idx !== -1 || val === '') return;
-        const newList = list.concat({
+        const newList = [{
             name: item,
             done: false,
-        });
+        }].concat(list);
         setList(newList);
     };
     const removeItem = idx => {
