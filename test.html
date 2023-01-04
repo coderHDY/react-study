@@ -1,41 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
 <body>
-    <style>
-        .ball {
-            background-color: rgb(173, 255, 154);
-            height: 100px;
-            width: 100px;
-            border-radius: 50px;
-        }
-
-    </style>
-    <div class="ball"></div>
+    <button id="add"> +1 </button>
 
     <script>
-        const keyFrames = new KeyframeEffect(
-            document.querySelector('.ball'),
-            [{
-                    transform: 'translate(0)'
-                },
-                {
-                    transform: 'translate(100%)'
-                },
-            ], {
-                duration: 3000,
-                fill: 'forwards'
+        const addBtn = document.querySelector("#add");
+        addBtn.addEventListener("click", () => {
+            let num = localStorage.getItem("num")
+            if (!num) {
+                num = 0;
             }
-        );
+            num = +num + 1;
+            localStorage.setItem("num", num);
+        });
 
+        /*  */
+        (() => {
+            const oritinItem = localStorage.setItem;
+            window.localStorage.setItem = (key, val) => {
+                const setItemEvent = new CustomEvent("setLocalStorage", { detail: { key, val } });
+                dispatchEvent(setItemEvent);
+                oritinItem.call(window.localStorage, key, val)
+            }
+        })()
+        window.addEventListener("setLocalStorage", e => console.log(e.detail));
     </script>
 </body>
-
-</html>
