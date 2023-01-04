@@ -7,7 +7,6 @@ export default function App() {
     const elements = useRoutes(routerMap);
     const [val] = useLocalStorage("time");
     const time = +val;
-    console.log(`app获取到的：${val}`);
     return (
         <>
             <div>播放时间：{`${parseInt(time / 60)}: ${parseInt(time % 60)}`}</div>

@@ -22,17 +22,22 @@ const getLocalStorage = (key) => {
 const removeLocalStorage = (key) => {
     localStorage.removeItem(key);
 }
-const useLocalStorage = (k, defaultVal = getLocalStorage(k)) => {
-    const [val, setVal] = useState(defaultVal);
+const useLocalStorage = (k) => {
+    const localData = getLocalStorage(k);
+    const [val, setVal] = useState(localData);
     const removeData = useCallback(() => removeLocalStorage(k), [k]);
     const setData = useCallback((val) => setLocalStorage(k, val), [k]);
 
+    /**
+     * 应该以传入的为准还是以既存的为准？
+     * 以 localStorage 既存的为准
+     */
     // 初始化
     useEffect(() => {
-        if (defaultVal !== val) {
-            setVal(defaultVal);
+        if (localData !== val) {
+            setVal(localData);
         }
-    }, [setVal, defaultVal, val])
+    }, [setVal, localData, val]);
 
     // 改变
     const listener = useCallback(e => {

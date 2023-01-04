@@ -17,7 +17,6 @@ export default function About() {
         )
     }
     const [time] = useLocalStorage("time");
-    console.log(`about获取到的：${time}`);
     return (
         <>
             <div>About</div>
