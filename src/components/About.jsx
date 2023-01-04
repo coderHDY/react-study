@@ -23,6 +23,12 @@ export default function About() {
             <div>{`${parseInt(time / 60)}: ${parseInt(time % 60)}`}</div>
             <div>{time}</div>
             <button onClick={goHome}>点我去主页</button>
+            <Child />
         </>
     )
+}
+
+const Child = () => {
+    const [time] = useLocalStorage("time");
+    return <div>{time}</div>
 }

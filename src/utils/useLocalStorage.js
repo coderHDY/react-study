@@ -29,7 +29,7 @@ const useLocalStorage = (k) => {
     const setData = useCallback((val) => setLocalStorage(k, val), [k]);
 
     /**
-     * 应该以传入的为准还是以既存的为准？
+     * 需不需要以传入的为准还是以既存的为准？
      * 以 localStorage 既存的为准
      */
     // 初始化
