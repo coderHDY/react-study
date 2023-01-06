@@ -3,7 +3,7 @@ import useLocalStorage from '../utils/useLocalStorage';
 
 export default function Home() {
     const videoRef = useRef();
-    const [time, { setData: setTime }] = useLocalStorage("time")
+    const [time, { set: setTime }] = useLocalStorage("time")
     // 取
     const initTime = () => {
         const t = +time;

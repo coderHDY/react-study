@@ -16,11 +16,11 @@
         (() => {
             const oritinItem = localStorage.setItem;
             window.localStorage.setItem = (key, val) => {
-                const setItemEvent = new CustomEvent("setLocalStorage", { detail: { key, val } });
+                const setItemEvent = new CustomEvent("changeLocalStorage", { detail: { key, val } });
                 dispatchEvent(setItemEvent);
                 oritinItem.call(window.localStorage, key, val)
             }
         })()
-        window.addEventListener("setLocalStorage", e => console.log(e.detail));
+        window.addEventListener("changeLocalStorage", e => console.log(e.detail));
     </script>
 </body>

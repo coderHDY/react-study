@@ -5,9 +5,8 @@ import routerMap from './router'
 export default function App() {
     const computedClassName = ({ isActive }) => isActive ? 'haha' : ''
     const elements = useRoutes(routerMap);
-    const [val] = useLocalStorage("time");
-    const time = +val;
-    console.log("刷新")
+    const [val, { remove: clearTime }] = useLocalStorage("time");
+    const time = val ? +val : 0;
     return (
         <>
             <div>播放时间：{`${parseInt(time / 60)}: ${parseInt(time % 60)}`}</div>
@@ -17,6 +16,7 @@ export default function App() {
                 <NavLink className={computedClassName} to="/about" state={{ name: '溜溜', id: 3 }}>About</NavLink>
             </div>
             {elements}
+            <button onClick={clearTime}>remove</button>
         </>
     )
 }

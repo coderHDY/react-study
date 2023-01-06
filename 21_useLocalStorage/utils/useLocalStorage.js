@@ -7,13 +7,13 @@ import { useState, useEffect, useCallback } from "react";
     window.localStorage.setItem = (key, val) => {
 
         // customEvent默认不冒泡
-        const setItemEvent = new CustomEvent("setLocalStorage", { detail: { key, val }, bubbles: true });
+        const setItemEvent = new CustomEvent("changeLocalStorage", { detail: { key, val }, bubbles: true });
         dispatchEvent(setItemEvent);
         oritinItem.call(window.localStorage, key, val)
     }
 })();
 
-const setLocalStorage = (key, val) => {
+const changeLocalStorage = (key, val) => {
     localStorage.setItem(key, JSON.stringify(val));
 }
 const getLocalStorage = (key) => {
@@ -26,7 +26,7 @@ const useLocalStorage = (k) => {
     const localData = getLocalStorage(k);
     const [val, setVal] = useState(localData);
     const removeData = useCallback(() => removeLocalStorage(k), [k]);
-    const setData = useCallback((val) => setLocalStorage(k, val), [k]);
+    const setData = useCallback((val) => changeLocalStorage(k, val), [k]);
 
     /**
      * 应该以传入的为准还是以既存的为准？
@@ -49,8 +49,8 @@ const useLocalStorage = (k) => {
     }, [k, setVal]);
 
     useEffect(() => {
-        window.addEventListener("setLocalStorage", listener);
-        return () => window.removeEventListener("setLocalStorage", listener);
+        window.addEventListener("changeLocalStorage", listener);
+        return () => window.removeEventListener("changeLocalStorage", listener);
     }, [listener]);
 
     return [

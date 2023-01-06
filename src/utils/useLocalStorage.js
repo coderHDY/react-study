@@ -1,15 +1,23 @@
 import { useState, useEffect, useCallback } from "react";
 
+const CHANGE_STORAGE_EVENT = "changeLocalStorage";
 
 /* 修改原生 setStorage */
 (() => {
-    const oritinItem = localStorage.setItem;
+    const oritinSetItem = localStorage.setItem;
     window.localStorage.setItem = (key, val) => {
 
         // customEvent默认不冒泡
-        const setItemEvent = new CustomEvent("setLocalStorage", { detail: { key, val }, bubbles: true });
+        const setItemEvent = new CustomEvent(CHANGE_STORAGE_EVENT, { detail: { key, val }, bubbles: true });
         dispatchEvent(setItemEvent);
-        oritinItem.call(window.localStorage, key, val)
+        oritinSetItem.call(window.localStorage, key, val)
+    }
+
+    const oritinRemoveItem = localStorage.removeItem;
+    window.localStorage.removeItem = (key) => {
+        const setItemEvent = new CustomEvent(CHANGE_STORAGE_EVENT, { detail: { key, val: null }, bubbles: true });
+        dispatchEvent(setItemEvent);
+        oritinRemoveItem.call(window.localStorage, key)
     }
 })();
 
@@ -22,22 +30,21 @@ const getLocalStorage = (key) => {
 const removeLocalStorage = (key) => {
     localStorage.removeItem(key);
 }
-const useLocalStorage = (k) => {
-    const localData = getLocalStorage(k);
-    const [val, setVal] = useState(localData);
-    const removeData = useCallback(() => removeLocalStorage(k), [k]);
-    const setData = useCallback((val) => setLocalStorage(k, val), [k]);
+const useLocalStorage = (k, defaultVal) => {
+    const [val, setVal] = useState(defaultVal);
+    const remove = useCallback(() => {
+        setVal(null);
+        removeLocalStorage(k)
+    }, [k]);
+    const set = useCallback((val) => setLocalStorage(k, val), [k]);
 
-    /**
-     * 需不需要以传入的为准还是以既存的为准？
-     * 以 localStorage 既存的为准
-     */
     // 初始化
     useEffect(() => {
-        if (localData !== val) {
+        const localData = getLocalStorage(k);
+        if (localData !== defaultVal) {
             setVal(localData);
         }
-    }, [setVal, localData, val]);
+    }, [k, setVal, defaultVal])
 
     // 改变
     const listener = useCallback(e => {
@@ -49,15 +56,15 @@ const useLocalStorage = (k) => {
     }, [k, setVal]);
 
     useEffect(() => {
-        window.addEventListener("setLocalStorage", listener);
-        return () => window.removeEventListener("setLocalStorage", listener);
+        window.addEventListener(CHANGE_STORAGE_EVENT, listener);
+        return () => window.removeEventListener(CHANGE_STORAGE_EVENT, listener);
     }, [listener]);
 
     return [
         val,
         {
-            setData,
-            removeData,
+            set,
+            remove,
         }
     ];
 }
