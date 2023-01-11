@@ -22,7 +22,6 @@ export default function Home() {
     const Row = memo(({ index, style }) => {
         const item = list[index];
         if (!item) return null;
-        console.log(item)
         return (
             <div style={{ ...style, cursor: 'pointer' }} key={item.id} onClick={() => navigate("/detail", { state: { key: index } })}>
                 <div>{item.val}</div>
