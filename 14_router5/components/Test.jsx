@@ -1,7 +1,7 @@
 import React from 'react'
 // import qs from 'querystring-es3';
 import qs from 'querystring'
-import { Link, Route, Switch, Redirect } from 'react-router-dom'
+import { Link, Route, Routes, Redirect } from 'react-router-dom'
 
 export default function Test(props) {
     const c1 = {
@@ -21,10 +21,10 @@ export default function Test(props) {
                 <Link to={{ pathname: "/test/c2", state: { name: c2.name, id: c2.id } }}>C2</Link>
                 <button onClick={goAbout(12345)}>去about</button>
             </div>
-            <Switch>
-                <Route path="/test/c1" component={C1}></Route>
-                <Route path="/test/c2" component={C2}></Route>
-            </Switch>
+            <Routes>
+                <Route path="/test/c1" element={C1}></Route>
+                <Route path="/test/c2" element={C2}></Route>
+            </Routes>
         </>
     )
 }

@@ -3,7 +3,7 @@ import About from "../components/About"
 import Detail from "../components/Detail";
 import { Navigate } from "react-router-dom";
 import Err from "../components/Err";
-import KeepAlive from 'react-activation'
+import KeepAlive from 'react-activation';
 
 const routerMap = [
     {
