@@ -1,10 +1,12 @@
 import React from 'react';
-import BaseRouter from "./system/router";
+import { useRoutes } from 'react-router-dom';
+import routerMap from './router'
 
 function App() {
+    const elements = useRoutes(routerMap);
     return (
         <div>
-            {<BaseRouter />}
+            {elements}
         </div>
     )
 }
