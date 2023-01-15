@@ -47,32 +47,32 @@ class KeepAlive extends Component {
     this.id = props.id
     this.init()
 
-    // 继承响应父级 KeepAlive 的生命周期
-    ;[LIFECYCLE_ACTIVATE, LIFECYCLE_UNACTIVATE].forEach((lifecycleName) => {
-      this[lifecycleName] = () => {
-        const { id, _helpers } = this.props
-        const cache = _helpers.getCache(id)
-        const node = _helpers.getNode(id)
-        if (node && lifecycleName === LIFECYCLE_ACTIVATE) {
-          node.updateTime = Date.now()
-        }
-
-        const cached = lifecycleName === LIFECYCLE_UNACTIVATE
-
-        // 若组件即将卸载则不再触发缓存生命周期
-        if (!cache || cache.willDrop) {
-          // 若组件在父 KeepAlive 缓存期间被卸载，后续恢复后需重新触发 init
-          if (this.cached && !cached) {
-            this.init()
+      // 继承响应父级 KeepAlive 的生命周期
+      ;[LIFECYCLE_ACTIVATE, LIFECYCLE_UNACTIVATE].forEach((lifecycleName) => {
+        this[lifecycleName] = () => {
+          const { id, _helpers } = this.props
+          const cache = _helpers.getCache(id)
+          const node = _helpers.getNode(id)
+          if (node && lifecycleName === LIFECYCLE_ACTIVATE) {
+            node.updateTime = Date.now()
           }
-          return
-        }
 
-        run(cache, lifecycleName)
-        cache.cached = cached
-        this.cached = cached
-      }
-    })
+          const cached = lifecycleName === LIFECYCLE_UNACTIVATE
+
+          // 若组件即将卸载则不再触发缓存生命周期
+          if (!cache || cache.willDrop) {
+            // 若组件在父 KeepAlive 缓存期间被卸载，后续恢复后需重新触发 init
+            if (this.cached && !cached) {
+              this.init()
+            }
+            return
+          }
+
+          run(cache, lifecycleName)
+          cache.cached = cached
+          this.cached = cached
+        }
+      })
   }
 
   // DOM 操作将实际内容插入占位元素
@@ -247,7 +247,7 @@ class KeepAlive extends Component {
     return (
       <div
         key="keep-alive-placeholder"
-        nodeKeyIgnore
+        nodekeyignore={"true"}
         className="ka-wrapper"
         ref={(node) => {
           this.placeholder = node
@@ -260,8 +260,8 @@ class KeepAlive extends Component {
 // 兼容 SSR 服务端渲染
 function SSRKeepAlive({ children }) {
   return (
-    <div key="keep-alive-placeholder" nodeKeyIgnore className="ka-wrapper">
-      <div key="keeper-container" nodeKeyIgnore className="ka-content">
+    <div key="keep-alive-placeholder" nodekeyignore={"true"} className="ka-wrapper">
+      <div key="keeper-container" nodekeyignore={"true"} className="ka-content">
         {children}
       </div>
     </div>
