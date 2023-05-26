@@ -36,13 +36,15 @@ const Demo = () => {
         editorUrl="/ckeditor/ckeditor.js"
         config={{
           skin: "minimalist",
-          extraPlugins: "emoji,image2,uploadimage,quicktable",
-          removeButtons: "PasteFromWord",
+          extraPlugins:
+            "emoji,image2,uploadimage,quicktable,colorbutton,colordialog",
+          removeButtons: "PasteFromWord,PasteFromWord",
           removePlugins: "elementspath,font,fontSize,image",
           removeDialogTabs: "image:advanced;link:advanced",
           toolbar: [
             ["Undo", "Redo"],
             ["Styles", "Format"],
+            ["TextColor", "BGColor"],
             ["Bold", "Italic", "Underline", "Strike", "-", "RemoveFormat"],
             [
               "NumberedList",
@@ -55,8 +57,6 @@ const Demo = () => {
             ],
             ["Link", "Unlink"],
             ["Image", "Table", "EmojiPanel"],
-            ["Maximize"],
-            ["Scayt"],
           ],
           // 必要的url
           // filebrowserUploadUrl:
@@ -86,20 +86,16 @@ const Demo = () => {
         onDialogHide={(evt) => {
           evt.stop();
         }}
-        onChange={(e) => {
-          const { editor } = e;
-          const isDirty = editor.checkDirty();
-          console.log(isDirty);
-          console.log(e);
-          console.log(editor);
-        }}
         onFocus={() => console.log("TODO 外面的input框blur事件")}
         // add
         onDialogShow={(ev) => {
           // 入る時、ウップロードの画面にする。
           ev.data.parts?.tabs?.$?.children[1]?.click();
-          const iframe = ev.data.parts.contents?.$?.querySelector("iframe.cke_dialog_ui_input_file");
-          const input = iframe?.contentWindow.document.querySelector("input[type=file]");
+          const iframe = ev.data.parts.contents?.$?.querySelector(
+            "iframe.cke_dialog_ui_input_file"
+          );
+          const input =
+            iframe?.contentWindow.document.querySelector("input[type=file]");
           input?.setAttribute("accept", "image/*");
         }}
       />
