@@ -1,0 +1,10 @@
+:root,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* 隐藏ckeditor菜单栏 */
+/* .cke_top.cke_reset_all {
+	display: none;
+} */
