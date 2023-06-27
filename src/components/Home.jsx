@@ -2,6 +2,7 @@ import { useReducer, useState, useEffect, useRef } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import useSwipe from "hooks/useSwipe";
 
 const style = {
   item: {
@@ -10,6 +11,7 @@ const style = {
 };
 
 const Demo = () => {
+  useSwipe();
   const settings = {
     dots: true,
     infinite: true,
