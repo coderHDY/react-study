@@ -37,13 +37,15 @@ const useStyles = makeStyles((theme) =>
 const Demo = () => {
   const classes = useStyles();
   const swipeRef = useRef();
-  const onEnd = (info) => {
-    if (info.xSpeed > 0.5) {
-      console.log("触发侧边栏展开");
-    }
-  };
+
   const onStart = (startInfo) => {
     return startInfo.x < 100;
+  };
+  const onEnd = (info) => {
+    console.log(info);
+    if (info.xSpeed > 0.5 || (info.xMovePercent > 0.5 && info.yMoved < 100)) {
+      console.log("触发侧边栏展开");
+    }
   };
   useSwipe({ onStart, onEnd }, swipeRef.current);
   // const settings = {
