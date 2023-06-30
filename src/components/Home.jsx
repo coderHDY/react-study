@@ -42,45 +42,55 @@ const Demo = () => {
     return startInfo.x < 100;
   };
   const onEnd = (info) => {
-    console.log(info);
     if (info.xSpeed > 0.5 || (info.xMovePercent > 0.5 && info.yMoved < 100)) {
       console.log("触发侧边栏展开");
     }
   };
   useSwipe({ onStart, onEnd }, swipeRef.current);
-  // const settings = {
-  //   dots: true,
-  //   infinite: true,
-  //   speed: 500,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1,
-  //   accessibility: false,
-  // };
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    accessibility: false,
+  };
   return (
     <div className={classes.root}>
-      <h2> Single Item</h2>
-      {/* <Slider {...settings}> */}
-      <div ref={swipeRef} className={classes.swipeRoot}>
+      <Slider {...settings}>
+        {/* <div ref={swipeRef} className={classes.swipeRoot}> */}
         <div className="slickItem" data-num={1}>
-          <h3>1</h3>
+          <div>
+            <h3>1</h3>
+          </div>
         </div>
         <div className="slickItem">
-          <h3>2</h3>
+          <div>
+            <h3>2</h3>
+          </div>
         </div>
         <div className="slickItem">
-          <h3>3</h3>
+          <div>
+            <h3>3</h3>
+          </div>
         </div>
         <div className="slickItem">
-          <h3>4</h3>
+          <div>
+            <h3>4</h3>
+          </div>
         </div>
         <div className="slickItem">
-          <h3>5</h3>
+          <div>
+            <h3>5</h3>
+          </div>
         </div>
         <div className="slickItem">
-          <h3>6</h3>
+          <div>
+            <h3>6</h3>
+          </div>
         </div>
-      </div>
-      {/* </Slider> */}
+        {/* </div> */}
+      </Slider>
     </div>
   );
 };
