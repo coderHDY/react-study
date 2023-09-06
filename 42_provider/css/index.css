@@ -1,0 +1,28 @@
+:root,
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.html {
+  touch-action: pan-y;
+}
+
+.slickItem {
+  text-align: center;
+  align-items: center;
+  height: 80vh;
+  line-height: 80vh;
+  vertical-align: middle;
+}
+
+.slickItem div {
+  margin: auto;
+  text-align: center;
+  width: 600px;
+  height: 600px;
+  line-height: 600px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 20px #333;
+}
