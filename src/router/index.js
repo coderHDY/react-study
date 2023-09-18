@@ -6,7 +6,7 @@ import ChildTest from "../components/ChildTest";
 
 const routerMap = [
     {
-        path: "/home",
+        path: "/",
         element: <Home />,
     },
     {
@@ -16,10 +16,6 @@ const routerMap = [
     {
         path: "/childTest",
         element: <ChildTest />,
-    },
-    {
-        path: "/",
-        element: <Navigate to="/home" />,
     },
     {
         path: '*',
