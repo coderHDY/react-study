@@ -19,9 +19,8 @@
 
     <script>
       // 注册service worker
-      if ("serviceWorker" in navigator) {
-        const ws = new WebSocket("ws://localhost:8089");
-        console.log(ws);
+      let ws = new WebSocket("ws://localhost:8089");
+      const initWs = () => {
         ws.addEventListener("open", function () {
           console.log("用websocket与服务器建立连接...");
         });
@@ -36,7 +35,17 @@
             window.location.reload();
           }
         });
-      }
+      };
+      initWs();
+
+      // 持续刷新
+      setInterval(() => {
+        console.log(ws);
+        if (ws.readyState === ws.CLOSED) {
+          ws = new WebSocket("ws://localhost:8089");
+          initWs();
+        }
+      }, 10000);
     </script>
   </body>
 </html>

@@ -9,8 +9,6 @@ const WebSocket = require("ws");
 const wss = new WebSocket.Server({ port: 8089 }); // 监听版本号变化事件
 setInterval(() => {
   const version = "1.0.1";
-  console.log("-------");
-  console.log(wss);
   wss.clients.forEach((client) => {
     client.send(version); // 向客户端发送版本号
   });
