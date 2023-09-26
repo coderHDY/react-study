@@ -16,9 +16,6 @@ const Home = () => {
   );
 };
 
-const arePropsEqual = (oldProps, newProps) => {
-  return oldProps.children === newProps.children;
-};
 const Child = memo(({ onClick, children }) => {
   console.log("refresh");
   return <button onClick={onClick}>{children}</button>;
