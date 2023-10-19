@@ -7,7 +7,7 @@ import versionChecker from "utils/watchVersion";
 
 function App() {
   const elements = useRoutes(routerMap);
-  const updatedCb = () => console.log("--------  updated ---------");
+  const updatedCb = () => console.log("------  updated ------");
   useEffect(() => {
     versionChecker.addCallBack(updatedCb);
     versionChecker.checkVersion();
