@@ -1,0 +1,27 @@
+:root,
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.html {
+  touch-action: pan-y;
+}
+
+.wrapper {
+  margin: 20rem;
+  width: 100px;
+  display: flex;
+  height: 30px;
+}
+
+.tab {
+  flex: 1;
+  background-color: white;
+}
+
+.tab.active {
+  flex: 1;
+  background-color: red;
+}
