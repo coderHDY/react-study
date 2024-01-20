@@ -21,6 +21,7 @@
         "create-react-context": "^0.3.0",
         "crypto-js": "^4.1.1",
         "customize-cra": "^1.0.0",
+        "dhtmlx-gantt": "^8.0.6",
         "hoist-non-react-statics": "^3.3.2",
         "http-proxy-middleware": "^2.0.3",
         "keyboardjs": "^2.7.0",
