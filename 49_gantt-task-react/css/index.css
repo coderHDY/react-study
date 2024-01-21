@@ -1,0 +1,48 @@
+:root,
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.html {
+  touch-action: pan-y;
+}
+
+.wrapper {
+  margin: 20rem;
+  width: 100px;
+  display: flex;
+  height: 30px;
+}
+
+.tab {
+  flex: 1;
+  background-color: white;
+}
+
+.tab.active {
+  flex: 1;
+  background-color: red;
+}
+
+/* gantt */
+.gantt-container {
+  height: calc(100vh - 50px - 200px);
+}
+.message-area {
+  background: #ebebeb;
+  height: 200px;
+  overflow: auto;
+  padding: 10px;
+  box-sizing:border-box;
+}
+.message-area ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.message-area li:before {
+  content: "\003e";
+  padding-right: 10px;
+}
