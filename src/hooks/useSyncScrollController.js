@@ -1,3 +1,7 @@
+/**
+ * 默认传入的横向滚动块同宽
+ * 默认传入的纵向滚动块同高
+ */
 import { useCallback, useRef, useEffect, useState } from "react";
 
 const MAX_WHEEL_SPEED = 200;
@@ -18,6 +22,7 @@ export const useSyncScrollController = () => {
   };
 
   // wheel滚动事件
+  // 性能优化：避免重复刷新注册事件
   const onRowWheel = useCallback((e) => {
     e.preventDefault();
     const { deltaY, deltaX, currentTarget: target } = e;
@@ -27,8 +32,8 @@ export const useSyncScrollController = () => {
     const maxScrollLeft = target.scrollWidth - target.clientWidth;
     const needScrollLeft =
       Math.min(Math.abs(deltaX), MAX_WHEEL_SPEED) * Math.sign(deltaX);
-    let newScrollLeft = scrollLeft + needScrollLeft;
-    newScrollLeft = target.scrollLeft + needScrollLeft;
+    let newScrollLeft = target.scrollLeft + needScrollLeft;
+    // 控制滚动速度
     newScrollLeft =
       newScrollLeft < 0
         ? 0
@@ -50,8 +55,8 @@ export const useSyncScrollController = () => {
     const maxScrollTop = target.scrollHeight - target.clientHeight;
     const needScrollTop =
       Math.min(Math.abs(deltaY), MAX_WHEEL_SPEED) * Math.sign(deltaY);
-    let newScrollTop = scrollTop + needScrollTop;
-    newScrollTop = target.scrollTop + needScrollTop;
+    // 控制滚动速度
+    let newScrollTop = target.scrollTop + needScrollTop;
     newScrollTop =
       newScrollTop < 0
         ? 0
@@ -62,22 +67,24 @@ export const useSyncScrollController = () => {
     setScrollTop(newScrollTop);
   }, []);
 
-  // scroll滚动事件
+  // scroll滚动事件 / 按钮滚动事件
   const onRowScroll = useCallback((e) => {
+    const targetScrollLeft = e.currentTarget.scrollLeft;
     rowSubscriber.current.forEach((ref) => {
       if (!ref.current) {
         return;
       }
-      ref.current.scrollLeft = e.currentTarget.scrollLeft;
+      ref.current.scrollLeft = targetScrollLeft;
     });
     setScrollLeft(e.currentTarget.scrollLeft);
   }, []);
   const onColScroll = useCallback((e) => {
+    const targetScrollTop = e.currentTarget.scrollTop;
     colSubscriber.current.forEach((ref) => {
       if (!ref.current) {
         return;
       }
-      ref.current.scrollTop = e.currentTarget.scrollTop;
+      ref.current.scrollTop = targetScrollTop;
     });
     setScrollTop(e.currentTarget.scrollTop);
   }, []);
@@ -88,11 +95,13 @@ export const useSyncScrollController = () => {
       if (!ref.current) {
         return;
       }
-      ref.current.addEventListener("wheel", onRowWheel);
+      ref.current.addEventListener("wheel", onRowWheel, { passive: false });
     });
     return () => {
       rowSubscriber.current.forEach((ref) => {
-        ref.current?.removeEventListener("wheel", onRowWheel);
+        ref.current?.removeEventListener("wheel", onRowWheel, {
+          passive: false,
+        });
       });
     };
   }, [rowSubscriber.current.size]);
@@ -101,11 +110,13 @@ export const useSyncScrollController = () => {
       if (!ref.current) {
         return;
       }
-      ref.current.addEventListener("wheel", onColWheel);
+      ref.current.addEventListener("wheel", onColWheel, { passive: false });
     });
     return () => {
       colSubscriber.current.forEach((ref) => {
-        ref.current?.removeEventListener("wheel", onColWheel);
+        ref.current?.removeEventListener("wheel", onColWheel, {
+          passive: false,
+        });
       });
     };
   }, [colSubscriber.current.size]);
@@ -140,5 +151,7 @@ export const useSyncScrollController = () => {
   return {
     addRowSubscriber,
     addColSubscriber,
+    scrollTop,
+    scrollLeft,
   };
 };
