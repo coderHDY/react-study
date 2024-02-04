@@ -76,7 +76,7 @@ export const useSyncScrollController = () => {
       }
       ref.current.scrollLeft = targetScrollLeft;
     });
-    setScrollLeft(e.currentTarget.scrollLeft);
+    setScrollLeft(targetScrollLeft);
   }, []);
   const onColScroll = useCallback((e) => {
     const targetScrollTop = e.currentTarget.scrollTop;
@@ -86,7 +86,7 @@ export const useSyncScrollController = () => {
       }
       ref.current.scrollTop = targetScrollTop;
     });
-    setScrollTop(e.currentTarget.scrollTop);
+    setScrollTop(targetScrollTop);
   }, []);
 
   // wheel滚动监听
