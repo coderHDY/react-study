@@ -2,23 +2,19 @@ import React, { useEffect, useRef } from "react";
 import { useSyncScrollController } from "../hooks/useSyncScrollController";
 
 const Home = () => {
-  const {
-    addRowSubscriber,
-    addColSubscriber,
-    scrollTop,
-    scrollLeft,
-  } = useSyncScrollController();
+  const { addHorSubscriber, addVerSubscriber, scrollTop, scrollLeft } =
+    useSyncScrollController();
 
-  useEffect(() => {
-    console.log("scrollTop", scrollTop);
-    console.log("scrollLeft", scrollLeft);
-  }, [scrollTop, scrollLeft]);
+  // useEffect(() => {
+  //   console.log("scrollTop", scrollTop);
+  //   console.log("scrollLeft", scrollLeft);
+  // }, [scrollTop, scrollLeft]);
   return (
     <div className="container">
-      <Left addColSubscriber={addColSubscriber} />
+      <Left addColSubscriber={addVerSubscriber} />
       <Right
-        addRowSubscriber={addRowSubscriber}
-        addColSubscriber={addColSubscriber}
+        addRowSubscriber={addHorSubscriber}
+        addColSubscriber={addVerSubscriber}
       />
     </div>
   );
