@@ -29,3 +29,9 @@ body {
   background-color: #fff;
   cursor: ew-resize;
 }
+
+/* 利用默认的选中文字拖动滚动效果来达到拖动scroll的效果 */
+.process::selection {
+  background-color: transparent;
+  color: unset;
+}
