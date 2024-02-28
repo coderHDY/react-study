@@ -1,0 +1,43 @@
+:root,
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  position: relative;
+  width: 700px;
+  height: 700px;
+  overflow: auto;
+}
+
+.svg-container {
+  position: relative;
+  width: 1400px;
+  height: 1400px;
+  background-color: #ecafaf;
+}
+.drag-svg-container {
+  position: absolute;
+}
+.top {
+  position: absolute;
+  top: 0;
+  left: 50%;
+}
+.bottom {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+}
+.left {
+  position: absolute;
+  top: 50%;
+  left: 0;
+}
+.right {
+  position: absolute;
+  top: 50%;
+  right: 0;
+}
