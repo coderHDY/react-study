@@ -1,0 +1,35 @@
+html {
+  font-family: sans-serif;
+  font-size: 14px;
+}
+
+table {
+  border: 1px solid lightgray;
+}
+
+tbody {
+  border-bottom: 1px solid lightgray;
+}
+
+th {
+  border-bottom: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+  padding: 2px 4px;
+}
+
+tfoot {
+  color: gray;
+}
+
+tfoot th {
+  font-weight: normal;
+}
+
+.react-grid-item {
+  background: rgb(235, 145, 145);
+}
+.layout {
+  background-image: radial-gradient(circle at 1px 1px, #d0d0d0 1px, #ffffff 1px);
+  background-size: 16.6px 16.6px;
+  background-repeat: repeat;
+}
